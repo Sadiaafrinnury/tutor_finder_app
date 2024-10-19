@@ -1,5 +1,5 @@
 const String MyTutorLogo = 'assets/images/Artboard 1 1.png';
-const String HomepageVector = "assets/images/big_shoes_chatting_1.svg";
+const String HomepageVector = "assets/images/Big Shoes - Chatting 1.png";
 const String HomepageVector1 = "assets/images/Big Shoes - Hero 1.png";
 const String ProfileImage1 = "assets/images/callum-blacoe-Id6U55AZMpg-unsplash 1.png";
 const String Ceramic = "assets/images/ceramic 1.png";
@@ -19,14 +19,15 @@ const String Math = "assets/images/math 1.png";
 const String OilPainting = "assets/images/oilpaint 1.png";
 const String GalleryIcon = "assets/images/outline_add_photo_alternate_black_24dp_1.svg";
 const String Piano = "assets/images/Piano 1.png";
-const String DetailClassImage = "assets/images/rectangle_68.svg";
-const String DetailClassImage1 = "assets/images/rectangle_69.svg";
-const String DetailClassImage2 = "assets/images/rectangle_70.svg";
+const String DetailClassImage = "assets/images/Rectangle 68.png";
+const String DetailClassImage1 = "assets/images/Rectangle 69.png";
+const String DetailClassImage2 = "assets/images/Rectangle 70.png";
 const String Trumpet = "assets/images/trumpet 1.png";
 const String Violin = "assets/images/vilolin 2.png";
 const String WaterPainting = "assets/images/WATERCOLOR 1.png";
 const String DotMenu = "assets/images/group_358.svg";
-const String ContactusBackgroundImage = "assets/images/big_shoes_torso_1.svg";
+const String ContactusBackgroundImage = "assets/images/Big Shoes - Torso 1.png";
 const String Vectorpng3 = "assets/images/Group 369.png";
 const String checkIcon = "assets/images/check_circle_FILL0_wght400_GRAD0_opsz48 1.png";
+const String Applyclassimage = "assets/images/Happy Bunch - Monochromatic 1.png";
 

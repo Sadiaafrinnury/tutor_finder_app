@@ -1,254 +1,361 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tutor_finder_app/screens/apply_class_screen.dart';
+import 'package:tutor_finder_app/screens/contact_us_screen.dart';
+import 'package:tutor_finder_app/screens/message_screen.dart';
+import 'package:tutor_finder_app/screens/profile_screen.dart';
+import 'package:tutor_finder_app/screens/tutorlist_screen.dart';
 import 'package:tutor_finder_app/util/app_colors.dart';
 import 'package:tutor_finder_app/util/app_images.dart';
 import 'package:tutor_finder_app/util/text_cons.dart';
-import '../widgets/searchbar.dart';
+import 'package:tutor_finder_app/widgets/custom_Bottom_navigation_bar.dart';
+import 'package:tutor_finder_app/widgets/custom_searchbar.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
+  final RxInt _selectedIndex = 0.obs;
+  final TextEditingController searchController = TextEditingController();
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      HomePageContent(searchController: searchController),
+      MessageScreen(),
+      MyClassScreen(),
+    ];
+  }
+
+  final List<CustomBottomNavigationBarItem> _bottomNavigationBarItems = [
+    CustomBottomNavigationBarItem(
+      icon: const Icon(
+        Icons.home,
+        size: 40,
+      ),
+      label: 'Home',
+    ),
+    CustomBottomNavigationBarItem(
+      icon: const Icon(
+        Icons.mail,
+        size: 40,
+      ),
+      label: 'Message',
+    ),
+    CustomBottomNavigationBarItem(
+      icon: const Icon(
+        Icons.school,
+        size: 40,
+      ),
+      label: 'My Class',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
+      body: Obx(
+            () => IndexedStack(
+          index: _selectedIndex.value,
+          children: pages,
+        ),
+      ), // Wrap IndexedStack with Obx for reactivity
+      bottomNavigationBar: CustomBottomNavigationBar(
+        items: _bottomNavigationBarItems,
+        currentIndex: _selectedIndex, // Use .value to get int
+        onTap: (index) {
+          // Update _selectedIndex value to switch pages
+          _selectedIndex.value = index;
+        },
+      ),
+    );
+  }
+}
+
+
+
+
+class HomePageContent extends StatefulWidget {
+  final TextEditingController searchController;
+
+  const HomePageContent({super.key, required this.searchController});
+
+  @override
+  State<HomePageContent> createState() => _HomePageContentState();
+}
+
+class _HomePageContentState extends State<HomePageContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
-        leading: Icon(
-          Icons.menu,
-          color: primaryBlue,
-        ),
+        backgroundColor: whiteColor,
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: Icon(
+                Icons.menu,
+                color: greyColor,
+              ),
+            );
+          },
+        )
       ),
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: <Widget>[
-          // Background Image (HomepageVector1)
-          Positioned(
-            bottom: 560,
-            child: Container(
-              width: 308,
-              height: 213,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    HomepageVector1,
-                  ), // Background image
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-          // Text (I need the tutor for)
-          Positioned(
-            bottom: 635,
-            left: 160,
-            child: Text(
-              HomePageText,
-              textAlign: TextAlign.left,
-              style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  height: 1,
-                ),
-              ),
-            ),
-          ),
-          // Foreground Image (MyTutorLogo)
-          Positioned(
-            bottom: 640,
-            left: 150,
-            child: Container(
-              width: 160,
-              height: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    MyTutorLogo,
-                  ), // Foreground image
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 590,
-            left: 20,
-            right: 20,
-            child: Searchbar(),
-          ),
-          Positioned(
-            top: 175,
-            left: 0,
-            child: Container(
-              height: 7,
-              width: 450,
-              color: primaryBlue,
-            ),
-          ),
-          Positioned.fill(
-            top: 170, // This moves the GridView down.
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              // Additional padding if needed
-              child: GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
-                children: buildGridItems(), // Use the helper method for grid items
-              ),
-            ),
-          ),
-      Positioned(
-        top: 600, // Adjust this value if needed
-        left: 2,
-        child: Container(
-          height: 130,
-          width: 420,
-          decoration: BoxDecoration(
-            color: primaryBlue,
-            image: DecorationImage(
-              image: AssetImage(
-                  Vectorpng3,
-              ),
-              alignment: Alignment.bottomLeft,
-            ),
-          ),
-        ),
-      ),
-          Positioned(
-            top: 620,
-            left: 190,
-            child: Text(
-              QuestionText,
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    fontSize: 27,
-                    color: whiteColor,
-                    fontWeight: FontWeight.w500,
-                    height: 1,
+      drawer:  NavDrawer() ,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 130, 0),
+                  child: Image(
+                    image: AssetImage(
+                      HomepageVector1,
+                    ),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 200,
                   ),
-                )
-            ),
-          ),
-          Positioned(
-            top: 650,
-            left: 250,
-            child: Text(
-                NoListingText,
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: whiteColor,
-                    fontWeight: FontWeight.w500,
-                    height: 1,
-                  ),
-                )
-            ),
-          ),
-          Positioned(
-            top: 685,
-            left: 264,
-            child: Container(
-              height: 30,
-              width: 86,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                  borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(13, 10, 0, 0),
-                child: Text(
-                    ApplyText,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 13,
-                        color: blackColor,
-                        fontWeight: FontWeight.normal,
-                        height: 1,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image(
+                      image: AssetImage(
+                        MyTutorLogo,
+                      ),
+                      height: 80,
+                    ),
+                    Text(
+                      HomePageText,
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomSearchBar(
+                        controller: widget.searchController,
+                        onChanged: (query) {
+                          if (query.isNotEmpty) {
+                            Get.to(() => TutorListScreen());
+                          }
+                        },
                       ),
                     ),
+                  ],
                 ),
+              ],
+            ),
+            Container(
+              height: 8,
+              width: 430,
+              color: blueColor,
+            ),
+            SizedBox(height: 20),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                _buildCategoryTile(ViolinText, Violin),
+                _buildCategoryTile(TrumpetText, Trumpet),
+                _buildCategoryTile(PianoText, Piano),
+                _buildCategoryTile(MathematicsText, Math),
+                _buildCategoryTile(ElectronicText, Electronic),
+                _buildCategoryTile(HistoryText, History),
+                _buildCategoryTile(WaterPaintingText, WaterPainting),
+                _buildCategoryTile(CeramicText, Ceramic),
+                _buildCategoryTile(OilPaintingText, OilPainting),
+              ],
+            ),
+            Container(
+              height: 200,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: blueColor,
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 80),
+                    child: Image(
+                      image: AssetImage(
+                        Vectorpng3,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(40, 60, 0, 0),
+                    child: Column(
+                      children: [
+                        Text(
+                          QuestionText,
+                          style: GoogleFonts.poppins(
+                            color: whiteColor,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 3),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 90),
+                          child: Text(
+                            NoListingText,
+                            style: GoogleFonts.poppins(
+                              color: whiteColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 90),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: whiteColor),
+                            onPressed: () {
+                              Get.to(TutorFormScreen());
+                            },
+                            child: Text(
+                              ApplyText,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: blackColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+Widget _buildCategoryTile(String title, String imagePath) {
+  return Container(
+    padding: EdgeInsets.all(8),
+    child: Container(
+      child: Column(
+        children: [
+          Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
           ),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+
+
+class NavDrawer extends StatelessWidget {
+  const NavDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: blueColor,
+      child: ListView(
+        padding: EdgeInsets.only(top: 100),
+        children: [
+          ListTile(
+            leading: Icon(
+              Icons.mail,
+              color: whiteColor,
+              size: 30,
+            ),
+            title: Text(
+              'Message',
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          SizedBox(height: 30),
+          ListTile(
+            leading: Icon(
+              Icons.school,
+              color: whiteColor,
+              size: 25,
+            ),
+            title: Text(
+              'My Class',
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          SizedBox(height: 30),
+          ListTile(
+            leading: Icon(
+              Icons.info,
+              color: whiteColor,
+              size: 25,
+            ),
+            title: Text(
+              'Contact Us',
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Get.to(ContactUsScreen());
+            },
+          ),
+          SizedBox(height: 30),
         ],
       ),
     );
   }
-
-  List<Widget> buildGridItems() {
-    // List of text items for the grid
-    List<String> texts = [
-      ViolinText,
-      TrumpetText,
-      PianoText,
-      MathematicsText,
-      ElectronicText,
-      HistoryText,
-      WaterPaintingText,
-      CeramicText,
-      OilPaintingText,
-    ];
-
-    // List of images corresponding to the text items
-    List<String> images = [
-      Violin,
-      Trumpet,
-      Piano,
-      Math,
-      Electronic,
-      History,
-      WaterPainting,
-      Ceramic,
-      OilPainting,
-    ];
-
-    // Ensure the number of items in texts and images matches
-    assert(texts.length == images.length);
-
-    // Generate all 9 grid items
-    return List.generate(9, (index) {
-      return Container(
-        height: 85,
-        width: 104,
-        decoration: BoxDecoration(
-          color: Colors.white70,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white70,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Adding image to the container
-            Image.asset(
-              images[index],
-              height: 65,
-              width: 104,
-              fit: BoxFit
-                  .cover,
-            ),
-            SizedBox(height: 5),
-            Text(
-              texts[index],
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                  fontSize: 14,
-                  color: blackColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    });
-  }
 }
+
+
+

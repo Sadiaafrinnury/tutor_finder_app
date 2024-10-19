@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tutor_finder_app/widgets/bottom_navigation_bar.dart';
+import 'package:tutor_finder_app/screens/home_page_screen.dart';
+import 'package:tutor_finder_app/screens/message_screen.dart';
+import 'package:tutor_finder_app/util/app_colors.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -9,17 +13,22 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: "Tutor Finder",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: MyBottomNavigationbar(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(
+            name: '/', page: () => HomePageScreen()),
+        GetPage(
+            name: '/', page: () => MessageScreen()),
+      ],
+      debugShowCheckedModeBanner: false,
+      home: HomePageScreen(),
     );
   }
 }

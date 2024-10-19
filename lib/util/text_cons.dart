@@ -13,45 +13,36 @@ const String NoListingText = "No listing fee";
 const String ApplyText = "Apply now";
 const String ArrowBackText = "BACK";
 const String TutorText = "Tutor";
-const String TutorNameText = "LINDA. K";
-const String TutorDetailText = '''Graduated from\nBerkeley College\nof Music. 
-I have 6 years\nof experience. 
-Member of the SF\nSymphony Orchestra.''';
+const String TutorNameText = 'LINDA. K';
+const String TutorDetailText = 'Graduated from Berkeley College of Music.\nI have 6 years of experience.\nMember of the SF symphony orchestra';
 
 const String TutorRateText = "\$ 80";
 const String AvailableText = "Available time";
 const String HourlyText = "/Hr";
-const String AvailabeTimeText = 'MON~THUR\n04:00PM ~\n05:00PM';
+const String AvailabeTimeText = 'MON~THUR\n04:00PM ~ 05:00PM';
 const String OnlineClassText = "Online Class";
 const String PersonClassText = "In-person Class";
 const String TutorNameText1 = "Lora. D";
-const String TutorDetailText1 = '''Play Misic.
-Music Together
-I cover classes\nfor beginners\nto intermediates.
-Music together\ncertified''';
+const String TutorDetailText1 = 'Play Music. Music Together\nI cover classes for beginners to intermediates.\nMusic together certified';
 const String TutorRateText1 = "\$ 50";
 const String AvailableText1 = "Available time";
 const String HourlyText1 = "/Hr";
-const String AvailabeTimeText1 = '''SAT~SUN\n01:00PM ~\n04:00PM''';
+const String AvailabeTimeText1 = 'SAT~SUN\n01:00PM ~ 04:00PM';
 const String TutorNameText2 = "Mark. M";
-const String TutorDetailText2 = '''I have 10 years of\nrich experience.
-I offer advanced\ncourses for\ncontests.''';
+const String TutorDetailText2 = 'I have 10 years of rich experience.\nI offer advanced courses for contests.';
 
 const String TutorRateText2 = "\$ 55";
-const String AvailabeTimeText2 = '''FRI~SUN\n01:00PM ~\n09:00PM
-                                  ''';
+const String AvailabeTimeText2 = 'FRI~SUN\n01:00PM ~ 09:00PM';
 const String TutorNameText3 = "Cathy.A";
-const String TutorDetailText3 = '''Online Class\nonly 7year\nonline class\nexpereience.
-I offer the ASAM\ntest preparation\nfor the student.''';
+const String TutorDetailText3 = 'Online Class only\n7-year online class experience.\nI offer ASAM test preparation for students.';
 
 const String TutorRateText3 = "\$ 80";
-const String AvailabeTimeText3 = '''MON~FRI\n01:00PM ~\n07:00PM''';
+const String AvailabeTimeText3 = 'MON~FRI\n01:00PM ~ 07:00PM';
 const String TutorNameText4 = "Chen. T";
-const String TutorDetailText4 = '''I offer the class\nonly for the\nbiggner. 
-I am majoring\nin violin at\nSanfransico\nmusic school.''';
+const String TutorDetailText4 = 'I offer classes only for beginners.\nMajoring in violin at San Francisco music school.';
 
 const String TutorRateText4 = "\$ 35";
-const String AvailabeTimeText4 = '''MON~FRI\n01:00PM ~\n07:00PM''';
+const String AvailabeTimeText4 = 'MON~FRI\n01:00PM ~ 07:00PM';
 
 const String TutorProfileDetailText = "See more";
 const String ResumeText = "Resume";
@@ -101,3 +92,16 @@ const String SortByText = "Sort by";
 const String DistanceText = "Distance";
 const String PriceText = "Price";
 const String SortByOnlineClassText = "Online class";
+const String MyClassText = "My Class";
+const String Message = "Messages";
+const String TutorDetail = "Tutor Detail";
+const String ResumeDetail = 'Master degree of the Berkeley College of Music 2015.\n'
+    '6 years of experience.\n'
+    'Member of the SF symphony orchestra';
+
+const String CurriculumText = "Curriculum";
+const String CurriculumDetailText = 'Suzuki book class for the beginner.\n'
+    'Class for intermediate learners.\n'
+    'Orchestra joint class.\n'
+    'ASAM test support.\n'
+    'Music together for the kids.';
